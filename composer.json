@@ -1,0 +1,16 @@
+{
+  "name": "petar/catalog-shop",
+  "authors": [
+    {
+      "name": "Petar",
+      "email": "marincicpetar@gmail.com"
+    }
+  ],
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Core\\": "Core/",
+      "Http\\": "Http/"
+    }
+  }
+}
