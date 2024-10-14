@@ -42,10 +42,19 @@ class Router
 
    public function route($uri, $method, $query)
    {
-      foreach ($this->routes as $route) {
+      $uriParts = explode("/", trim($uri, "/"),);
 
-         if ($uri === $route["uri"] && $method === $route["method"]) {
-            return     call_user_func([$route["controller"], $route["action"]], [$query]);
+      foreach ($this->routes as $route) {
+         $routeParts = explode("/", trim($route["uri"], "/"));
+
+         if ($uriParts[0] === $routeParts[0] && count($uriParts) === count($routeParts) && $method === $route["method"]) {
+
+            $id = $uriParts[1] ??  "";
+
+            return     call_user_func(
+               [$route["controller"], $route["action"]],
+               $id
+            );
          }
       }
       $this->abort();
