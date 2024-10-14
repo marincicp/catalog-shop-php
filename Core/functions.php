@@ -30,8 +30,8 @@ function sendJsonRes($data, $code = 200)
 
 function formatRes($data)
 {
-   if ($data) {
-      return ["data" => $data, "code" => 200];
+   if (empty($data)) {
+      return ["error" => "No data found", "code" => 404, "data" => []];
    }
-   return ["error" => "No data found", "code" => 404];
+   return ["data" => $data, "code" => 200];
 }

@@ -22,4 +22,12 @@ class ProductController
       $product = ProductModel::find($sku);
       return sendJsonRes($product, $product["code"]);
    }
+
+
+   public static function destroy($sku)
+   {
+
+      $response = ProductModel::delete($sku);
+      return sendJsonRes($response, $response["code"]);
+   }
 }
