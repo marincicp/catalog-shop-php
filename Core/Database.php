@@ -12,6 +12,7 @@ class Database
 {
    public $conn;
    public $stmt;
+   static $instance;
 
    public function __construct($config)
    {
@@ -34,6 +35,16 @@ class Database
    }
 
 
+   public static function getInstance()
+   {
+      $config = require "config.php";
+
+      if (self::$instance === null) {
+         self::$instance = new Database($config["database"]);
+      }
+      return self::$instance;
+   }
+
 
    public function query($query, $params = [])
    {
@@ -41,6 +52,8 @@ class Database
       $this->stmt->execute($params);
       return $this;
    }
+
+
 
 
    public function get()
