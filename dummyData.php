@@ -325,7 +325,7 @@ return [
       ],
       [
 
-         'product_id' => 8,
+         'product_id' => 9,
          'attribute' => 'color',
          'value' => 'white'
       ],
@@ -360,9 +360,20 @@ return [
          'value' => 'F1'
       ],
       [
+
+         'product_id' => 12,
+         'attribute' => 'expires_at',
+         'value' => 'F1'
+      ],
+      [
          'product_id' => 13,
          'attribute' => 'color',
          'value' => 'Black'
+      ],
+      [
+         'product_id' => 13,
+         'attribute' => 'shipping_price',
+         'value' => '3.99'
       ],
       [
          'product_id' => 14,
@@ -371,14 +382,31 @@ return [
       ],
       [
 
+         'product_id' => 14,
+         'attribute' => 'coupon_code',
+         'value' => 'ANTIVIRUS'
+      ],
+      [
+
          'product_id' => 15,
          'attribute' => 'color',
          'value' => 'White'
       ],
       [
+
+         'product_id' => 15,
+         'attribute' => 'shipping_price',
+         'value' => '10.99'
+      ],
+      [
          'product_id' => 16,
          'attribute' => 'expires_at',
          'value' => '2024-11-15'
+      ],
+      [
+         'product_id' => 16,
+         'attribute' => 'coupon_code',
+         'value' => 'VIDEO'
       ],
       [
 
@@ -388,9 +416,21 @@ return [
       ],
       [
 
+         'product_id' => 17,
+         'attribute' => 'shipping_price',
+         'value' => '4.99'
+      ],
+      [
+
          'product_id' => 18,
          'attribute' => 'expires_at',
          'value' => '2024-11-15'
+      ],
+      [
+
+         'product_id' => 18,
+         'attribute' => 'coupon_code',
+         'value' => 'DESIGN'
       ],
       [
 
@@ -409,6 +449,12 @@ return [
          'product_id' => 20,
          'attribute' => 'expires_at',
          'value' => '2024-11-15'
+      ],
+      [
+
+         'product_id' => 20,
+         'attribute' => 'coupon_code',
+         'value' => 'CLOUD'
       ],
 
    ],
