@@ -301,6 +301,12 @@ return [
       ],
       [
 
+         'product_id' => 7,
+         'attribute' => 'color',
+         'value' => 'red'
+      ],
+      [
+
          'product_id' => 8,
          'attribute' => 'shipping_price',
          'value' => '4.99'
@@ -308,8 +314,20 @@ return [
       [
 
          'product_id' => 8,
+         'attribute' => 'color',
+         'value' => 'black'
+      ],
+      [
+
+         'product_id' => 9,
          'attribute' => 'shipping_price',
          'value' => '3.99'
+      ],
+      [
+
+         'product_id' => 8,
+         'attribute' => 'color',
+         'value' => 'white'
       ],
       [
 
@@ -319,11 +337,22 @@ return [
       ],
       [
 
+         'product_id' => 10,
+         'attribute' => 'shipping_price',
+         'value' => '20.99'
+      ],
+      [
+
          'product_id' => 11,
          'attribute' => 'coupon_code',
          'value' => 'PES'
       ],
+      [
 
+         'product_id' => 11,
+         'attribute' => 'expires_at',
+         'value' => '2024-12-15'
+      ],
       [
 
          'product_id' => 12,
@@ -331,13 +360,11 @@ return [
          'value' => 'F1'
       ],
       [
-
          'product_id' => 13,
          'attribute' => 'color',
          'value' => 'Black'
       ],
       [
-
          'product_id' => 14,
          'attribute' => 'expires_at',
          'value' => '2024-11-15'
@@ -349,7 +376,6 @@ return [
          'value' => 'White'
       ],
       [
-
          'product_id' => 16,
          'attribute' => 'expires_at',
          'value' => '2024-11-15'
