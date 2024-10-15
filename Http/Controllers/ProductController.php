@@ -26,8 +26,16 @@ class ProductController
 
    public static function destroy($sku)
    {
-
       $response = ProductModel::delete($sku);
+      return sendJsonRes($response, $response["code"]);
+   }
+
+
+
+
+   public static function update($sku)
+   {
+      $response = ProductModel::update($sku);
       return sendJsonRes($response, $response["code"]);
    }
 }
