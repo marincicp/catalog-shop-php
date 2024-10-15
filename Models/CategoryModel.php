@@ -21,7 +21,7 @@ class CategoryModel
    public static function get()
    {
       try {
-         $products = Database::getInstance()->query("SELECT * FROM categories")->get();
+         $products = Database::getInstance()->query("SELECT id,name FROM categories")->get();
 
          return formatRes($products);
       } catch (\Exception $err) {
