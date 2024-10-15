@@ -35,6 +35,8 @@ class Database
    }
 
 
+
+
    public static function getInstance()
    {
       $config = require "config.php";
@@ -64,6 +66,17 @@ class Database
    public function find()
    {
       return $this->stmt->fetch();
+   }
+
+   public function count()
+   {
+      return $this->stmt->fetchColumn();
+   }
+
+
+   public function conn()
+   {
+      return $this->conn;
    }
 
    public function createTables()
