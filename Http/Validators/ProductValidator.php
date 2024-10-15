@@ -55,8 +55,8 @@ class ProductValidator
             if (!isset($data["expires_at"]) || !Validator::string($data["expires_at"])) {
                $this->errors["expires_at"] = "Expires At field is required";
             }
-            if (!isset($data["cupon_code"]) || !Validator::string($data["cupon_code"])) {
-               $this->errors["cupon_code"] = "Cupon Code field is required";
+            if (!isset($data["coupon_code"]) || !Validator::string($data["coupon_code"])) {
+               $this->errors["coupon_code"] = "Cupon Code field is required";
             }
             break;
 
