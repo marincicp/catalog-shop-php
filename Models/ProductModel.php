@@ -25,7 +25,27 @@ class ProductModel
    public static function get()
    {
       try {
-         $products = Database::getInstance()->query("SELECT * FROM products")->get();
+         $products = Database::getInstance()->query(
+            "SELECT  products.*, 
+          categories.name AS category_name,
+          GROUP_CONCAT(CASE 
+          WHEN attributes.attribute = 'color' THEN attributes.value 
+          END) AS colors,
+          GROUP_CONCAT(CASE 
+          WHEN attributes.attribute = 'shipping_price' THEN attributes.value 
+          END) AS shipping_prices,
+          GROUP_CONCAT(CASE 
+          WHEN attributes.attribute = 'coupon_code' THEN attributes.value 
+          END) AS coupon_codes,
+         GROUP_CONCAT(CASE 
+         WHEN attributes.attribute = 'expires_at' THEN attributes.value 
+         END) AS expires_at
+         FROM products INNER JOIN 
+        categories ON products.category_id = categories.id 
+        LEFT JOIN 
+        attributes ON attributes.product_id = products.id
+         GROUP BY products.id;"
+         )->get();
 
          return formatRes($products);
       } catch (Exception $err) {
@@ -36,7 +56,7 @@ class ProductModel
    public static function find($sku)
    {
       try {
-         $product =   self::getItem($sku);
+         $product = self::getItem($sku);
          return formatRes($product);
       } catch (Exception $err) {
          return ["code" => $err->getCode(), "error" => $err->getMessage()];
@@ -69,7 +89,7 @@ class ProductModel
          $validator = new ProductValidator();
 
          if (
-            ! $validator->validate(data: $data)
+            !$validator->validate(data: $data)
          ) {
             $errors = $validator->errors();
             return ["error" => $errors, "code" => 400];
@@ -93,9 +113,9 @@ class ProductModel
          self::updateProductAttributes($data, $product["id"]);
 
 
-         $updatedProdcut = self::getItem($sku);
+         $updatedProduct = self::getItem($sku);
 
-         return ["data" => $updatedProdcut, "code" => 200, "message" => "Product has been successfully updated"];
+         return ["data" => $updatedProduct, "code" => 200, "message" => "Product has been successfully updated"];
       } catch (Exception $err) {
 
          return ["code" => $err->getCode(), "error" => $err->getMessage()];
@@ -122,7 +142,29 @@ class ProductModel
 
    public static function getItem($sku)
    {
-      $item =   self::db()->query("SELECT * FROM products WHERE SKU = :SKU", ["SKU" => $sku])->find();
+      $item = self::db()->query(
+         "SELECT  products.*, 
+         categories.name AS category_name,
+          GROUP_CONCAT(CASE 
+          WHEN attributes.attribute = 'color' THEN attributes.value 
+          END) AS colors,
+          GROUP_CONCAT(CASE 
+          WHEN attributes.attribute = 'shipping_price' THEN attributes.value 
+          END) AS shipping_prices,
+          GROUP_CONCAT(CASE 
+          WHEN attributes.attribute = 'coupon_code' THEN attributes.value 
+          END) AS coupon_codes,
+          GROUP_CONCAT(CASE 
+          WHEN attributes.attribute = 'expires_at' THEN attributes.value 
+          END) AS expires_at
+         FROM products INNER JOIN 
+         categories ON products.category_id = categories.id 
+         LEFT JOIN attributes 
+         ON attributes.product_id = products.id  
+         WHERE SKU = :SKU
+         GROUP BY products.id;",
+         ["SKU" => $sku]
+      )->find();
 
       if (!$item) {
          throw new Exception("No data found", 404);
