@@ -5,7 +5,7 @@ namespace Core;
 use PDO;
 use PDOException;
 
-require "functions.php";
+require_once "functions.php";
 
 class Database
 

@@ -6,8 +6,9 @@ use Core\Database;
 use Exception;
 use ProductValidator;
 
-require "./Models/CategoryModel.php";
-require "./Http/Validators/ProductValidator.php";
+require_once "./Models/CategoryModel.php";
+require_once "./Http/Validators/ProductValidator.php";
+require_once "./Core/functions.php";
 class ProductModel
 {
    static $db;
@@ -23,27 +24,59 @@ class ProductModel
    public static function get()
    {
       try {
-         $products = Database::getInstance()->query(
-            "SELECT  products.*, 
-          categories.name AS category_name,
-          GROUP_CONCAT(CASE 
-          WHEN attributes.attribute = 'color' THEN attributes.value 
-          END) AS colors,
-          GROUP_CONCAT(CASE 
-          WHEN attributes.attribute = 'shipping_price' THEN attributes.value 
-          END) AS shipping_prices,
-          GROUP_CONCAT(CASE 
-          WHEN attributes.attribute = 'coupon_code' THEN attributes.value 
-          END) AS coupon_codes,
-         GROUP_CONCAT(CASE 
-         WHEN attributes.attribute = 'expires_at' THEN attributes.value 
-         END) AS expires_at
-         FROM products INNER JOIN 
-        categories ON products.category_id = categories.id 
-        LEFT JOIN 
-        attributes ON attributes.product_id = products.id
-         GROUP BY products.id;"
-         )->get();
+
+         $sql = "SELECT products.*, 
+                categories.name AS category_name,
+                GROUP_CONCAT(CASE 
+                WHEN attributes.attribute = 'color' THEN attributes.value 
+                END) AS colors,
+                GROUP_CONCAT(CASE 
+                WHEN attributes.attribute = 'shipping_price' THEN attributes.value 
+                END) AS shipping_prices,
+                GROUP_CONCAT(CASE 
+                WHEN attributes.attribute = 'coupon_code' THEN attributes.value 
+                END) AS coupon_codes,
+                GROUP_CONCAT(CASE 
+                WHEN attributes.attribute = 'expires_at' THEN attributes.value 
+                END) AS expires_at
+                FROM products 
+                INNER JOIN categories ON products.category_id = categories.id 
+                LEFT JOIN attributes ON attributes.product_id = products.id";
+
+         $conditions = [];
+         $params = [];
+
+         if (isset($_GET["name"])) {
+            $params["name"] = "%" .  $_GET["name"] . "%";
+            $conditions[] = "products.name LIKE :name";
+         }
+
+         if (isset($_GET["category"])) {
+            $params["category"] = $_GET["category"];
+            $conditions[] = "categories.name = :category";
+         }
+
+         if (isset($_GET["type"])) {
+            $params["type"] = $_GET["type"];
+            $conditions[] = "products.type = :type";
+         }
+         if (isset($_GET["minPrice"])) {
+            $params["minPrice"] = $_GET["minPrice"];
+            $conditions[] = "products.price  >= :minPrice";
+         }
+         if (isset($_GET["maxPrice"])) {
+            $params["maxPrice"] = $_GET["maxPrice"];
+            $conditions[] = "products.price  <= :maxPrice";
+         }
+
+
+         if (!empty($conditions)) {
+            $sql .= " WHERE " . implode(" AND ", $conditions);
+         }
+
+         $sql .= " GROUP BY products.id";
+
+         $products = self::db()->query($sql, $params)->get();
 
          return formatRes($products);
       } catch (Exception $err) {

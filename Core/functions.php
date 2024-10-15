@@ -39,7 +39,6 @@ function formatRes($data)
 
 function decodeJson()
 {
-
    $data = json_decode(file_get_contents("php://input"), true);
 
    if (!$data) {
