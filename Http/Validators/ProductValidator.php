@@ -1,22 +1,27 @@
 <?php
 
 use Models\CategoryModel;
+use Models\ProductModel;
 
 class ProductValidator
 {
    protected $errors = [];
-   protected const  PRODUCT_TYPES = ["virtual", "physical"];
+   protected const PRODUCT_TYPES = ["virtual", "physical"];
    protected $categoyIds;
 
-   public  function __construct()
+   public function __construct()
    {
 
       $this->categoyIds = CategoryModel::getCategoryIds();
    }
 
 
-   public function validate($data)
+   public function validate($data, $includeSKU = false)
    {
+
+      if ($includeSKU && !isset($data["sku"]) || ProductModel::validateSku($data["sku"])) {
+         $this->errors["sku"] = "SKU field must be unique";
+      }
 
       if (!isset($data["name"]) || !Validator::string($data["name"])) {
          $this->errors["name"] = "Name field is required";
@@ -38,18 +43,17 @@ class ProductValidator
          $this->errors["category_id"] = "Category does not exist";
       }
 
-      $this->validateProductTypesFields($data);
+      if (isset($data["type"])) {
+         $this->validateProductTypesFields($data);
+      }
 
       return empty($this->errors);
    }
 
 
 
-
-
    public function validateProductTypesFields($data)
    {
-
       switch ($data["type"]) {
          case "virtual":
             if (!isset($data["expires_at"]) || !Validator::string($data["expires_at"])) {
