@@ -15,14 +15,11 @@ class ProductController
       return sendJsonRes($products, $products["code"]);
    }
 
-
-
    public static function show($sku)
    {
       $product = ProductModel::find($sku);
       return sendJsonRes($product, $product["code"]);
    }
-
 
    public static function destroy($sku)
    {
@@ -30,12 +27,15 @@ class ProductController
       return sendJsonRes($response, $response["code"]);
    }
 
-
-
-
    public static function update($sku)
    {
       $response = ProductModel::update($sku);
+      return sendJsonRes($response, $response["code"]);
+   }
+
+   public static function store()
+   {
+      $response = ProductModel::store();
       return sendJsonRes($response, $response["code"]);
    }
 }

@@ -20,8 +20,6 @@ class ProductModel
       return self::$db;
    }
 
-
-
    public static function get()
    {
       try {
@@ -84,7 +82,7 @@ class ProductModel
       try {
          $product = self::getItem($sku);
 
-         $data = json_decode(file_get_contents('php://input'), true);
+         $data = decodeJson();
 
          $validator = new ProductValidator();
 
@@ -110,7 +108,7 @@ class ProductModel
 
 
 
-         self::updateProductAttributes($data, $product["id"]);
+         self::updateProductAttributes($data, $product["id"], "update");
 
 
          $updatedProduct = self::getItem($sku);
@@ -123,7 +121,7 @@ class ProductModel
    }
 
 
-   protected static function updateProductAttributes($data, $productId)
+   protected static function updateProductAttributes($data, $productId, $type = "create")
    {
       if ($data["type"] === "physical") {
          $attributes["color"] = $data["color"];
@@ -135,9 +133,54 @@ class ProductModel
          $attributes["expires_at"] = $data["expires_at"];
       }
 
-      foreach ($attributes as $attribute => $value) {
-         self::$db->query("UPDATE  attributes SET value = :value WHERE product_id = :product_id AND attribute = :attribute", ["attribute" => $attribute, "value" => $value, "product_id" => $productId]);
+
+      if ($type === "create") {
+         foreach ($attributes as $attribute => $value) {
+            self::db()->query("INSERT INTO attributes  (attribute, value, product_id) VALUES (:attribute, :value, :product_id)", ["attribute" => $attribute, "value" => $value, "product_id" => $productId]);
+         }
+      } else {
+         foreach ($attributes as $attribute => $value) {
+            self::$db->query("UPDATE  attributes SET value = :value WHERE product_id = :product_id AND attribute = :attribute", ["attribute" => $attribute, "value" => $value, "product_id" => $productId]);
+         }
       }
+   }
+
+
+
+   public static function store()
+   {
+      try {
+         $data = decodeJson();
+
+         $validator = new ProductValidator();
+
+         if (!$validator->validate($data, true)) {
+            $errors = $validator->errors();
+            return ["error" => $errors, "code" => 400];
+         }
+
+         $description = $data["description"] ?? "";
+
+         self::db()->query("INSERT INTO products
+         (name,  SKU, type, price, category_id, description, image_url) VALUES
+        (:name,  :SKU, :type, :price, :category_id, :description, :image_url)", ["name" => $data["name"], "SKU" => $data["sku"], "type" => $data["type"], "price" => $data["price"], "category_id" => $data["category_id"], "description" => $description, "image_url" => $data["image_url"]]);
+
+         $productId = self::db()->conn()->lastInsertId();
+
+         self::updateProductAttributes($data, $productId, "create");
+
+         $createdProduct = self::getItem($data["sku"]);
+
+         return ["data" => $createdProduct, "code" => 200, "message" => "Product has been successfully created"];
+      } catch (Exception $err) {
+         return ["code" => $err->getCode(), "error" => $err->getMessage()];
+      }
+   }
+
+
+   public static function validateSku($sku)
+   {
+      return self::db()->query("SELECT COUNT(*) FROM products WHERE SKU = :SKU", ["SKU" => $sku])->count();
    }
 
    public static function getItem($sku)

@@ -35,3 +35,16 @@ function formatRes($data)
    }
    return ["data" => $data, "code" => 200];
 }
+
+
+function decodeJson()
+{
+
+   $data = json_decode(file_get_contents("php://input"), true);
+
+   if (!$data) {
+      throw new Exception("Invalid JSON data", 400);
+   }
+
+   return $data;
+}

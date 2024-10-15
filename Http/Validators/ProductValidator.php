@@ -19,8 +19,10 @@ class ProductValidator
    public function validate($data, $includeSKU = false)
    {
 
-      if ($includeSKU && !isset($data["sku"]) || ProductModel::validateSku($data["sku"])) {
-         $this->errors["sku"] = "SKU field must be unique";
+      if ($includeSKU) {
+         if (!isset($data["sku"]) || ProductModel::validateSku($data["sku"])) {
+            $this->errors["sku"] = "SKU field must be unique";
+         }
       }
 
       if (!isset($data["name"]) || !Validator::string($data["name"])) {
