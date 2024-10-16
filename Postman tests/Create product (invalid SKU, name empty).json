@@ -1,0 +1,7 @@
+{
+  "error": {
+    "sku": "SKU field must be unique",
+    "name": "Name field is required"
+  },
+  "code": 400
+}

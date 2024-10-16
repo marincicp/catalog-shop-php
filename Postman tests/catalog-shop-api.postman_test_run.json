@@ -1,0 +1,363 @@
+{
+	"id": "f40a33d2-406e-4bca-8d1c-08b0d6ab9f70",
+	"name": "catalog-shop-api",
+	"timestamp": "2024-10-16T10:33:03.649Z",
+	"collection_id": "25444033-869a4b2e-bc3e-42d8-9393-2b93aa24fff7",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 11,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-10-16T10:32:58.957Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "cf72718a-40a8-4091-a792-f23a78aa70ae",
+			"name": "Get all products",
+			"url": "http://catalog-shop.test:8080/products",
+			"time": 345,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"GET ALL PRODUCTS - Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"GET ALL PRODUCTS - Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				345
+			],
+			"allTests": [
+				{
+					"GET ALL PRODUCTS - Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "bafc5018-f364-4138-bc46-020ce904513e",
+			"name": "Create product",
+			"url": "http://catalog-shop.test:8080/products",
+			"time": 362,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"CREATE PRODUCT - Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"CREATE PRODUCT - Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				362
+			],
+			"allTests": [
+				{
+					"CREATE PRODUCT - Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "b40f97d2-c8af-49af-b948-3b8f5257f6dd",
+			"name": "Create product (invalid SKU, name empty)",
+			"url": "http://catalog-shop.test:8080/products",
+			"time": 308,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"CREATE PRODUCT - Invalid POST request": true
+			},
+			"testPassFailCounts": {
+				"CREATE PRODUCT - Invalid POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				308
+			],
+			"allTests": [
+				{
+					"CREATE PRODUCT - Invalid POST request": true
+				}
+			]
+		},
+		{
+			"id": "e84c5600-1d78-4b6e-8bf0-4e376ccfc87a",
+			"name": "Update product",
+			"url": "http://catalog-shop.test:8080/products/vir-14-antivirus-software",
+			"time": 321,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"UPDATE PRODUCT - Successful PUT request": true
+			},
+			"testPassFailCounts": {
+				"UPDATE PRODUCT - Successful PUT request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				321
+			],
+			"allTests": [
+				{
+					"UPDATE PRODUCT - Successful PUT request": true
+				}
+			]
+		},
+		{
+			"id": "c39b7d91-aaa7-49cd-b415-1510b7c62fbe",
+			"name": "Update product (invalid SKU)",
+			"url": "http://catalog-shop.test:8080/products/vir-12-f1-pc-key",
+			"time": 306,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"UPDATE  PRODUCT - Invalid PUT request": true
+			},
+			"testPassFailCounts": {
+				"UPDATE  PRODUCT - Invalid PUT request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				306
+			],
+			"allTests": [
+				{
+					"UPDATE  PRODUCT - Invalid PUT request": true
+				}
+			]
+		},
+		{
+			"id": "e76d23b9-d23b-46d2-99ae-af2a852947bd",
+			"name": "Delete product",
+			"url": "http://catalog-shop.test:8080/products/phy-19-multifunctional-printer",
+			"time": 305,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"DELETE PRODUCT - Successful DELETE request": true
+			},
+			"testPassFailCounts": {
+				"DELETE PRODUCT - Successful DELETE request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				305
+			],
+			"allTests": [
+				{
+					"DELETE PRODUCT - Successful DELETE request": true
+				}
+			]
+		},
+		{
+			"id": "fe1b6e55-932c-48c0-8fad-68c8110cec5d",
+			"name": "Delete product (invalid SKU)",
+			"url": "http://catalog-shop.test:8080/products/vir",
+			"time": 289,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"DELETE PRODUCT - Invalid DELETE request": true
+			},
+			"testPassFailCounts": {
+				"DELETE PRODUCT - Invalid DELETE request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				289
+			],
+			"allTests": [
+				{
+					"DELETE PRODUCT - Invalid DELETE request": true
+				}
+			]
+		},
+		{
+			"id": "7bd9be69-e016-4c7b-8960-44dabfc2c0c0",
+			"name": "Get product by SKU",
+			"url": "http://catalog-shop.test:8080/products/phy-3-tablet-lenovo-p11",
+			"time": 337,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"GET PRODUCT BY SKU - Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"GET PRODUCT BY SKU - Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				337
+			],
+			"allTests": [
+				{
+					"GET PRODUCT BY SKU - Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "bff7849a-7537-4f83-9930-08f58b98232a",
+			"name": "Get product by SKU  (invalid SKU)",
+			"url": "http://catalog-shop.test:8080/products/phy",
+			"time": 302,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				" GET PRODUCT BY SKU (invalid) - Status code is 404": true
+			},
+			"testPassFailCounts": {
+				" GET PRODUCT BY SKU (invalid) - Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				302
+			],
+			"allTests": [
+				{
+					" GET PRODUCT BY SKU (invalid) - Status code is 404": true
+				}
+			]
+		},
+		{
+			"id": "0fb10aad-1ad6-44b4-b623-5a293d66d87c",
+			"name": "Get all products with query params",
+			"url": "http://catalog-shop.test:8080/products?name=laptop",
+			"time": 367,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"GET ALL PRODUCTS WITH QUERY PARAMS - Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"GET ALL PRODUCTS WITH QUERY PARAMS - Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				367
+			],
+			"allTests": [
+				{
+					"GET ALL PRODUCTS WITH QUERY PARAMS - Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "e0f48d4a-6455-4c00-b2c6-0332f3834468",
+			"name": "Get all categories",
+			"url": "http://catalog-shop.test:8080/categories",
+			"time": 303,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"GET CATEGORIES - Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"GET CATEGORIES - Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				303
+			],
+			"allTests": [
+				{
+					"GET CATEGORIES - Status code is 200": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 3545,
+	"collection": {
+		"requests": [
+			{
+				"id": "cf72718a-40a8-4091-a792-f23a78aa70ae",
+				"method": "GET"
+			},
+			{
+				"id": "bafc5018-f364-4138-bc46-020ce904513e",
+				"method": "POST"
+			},
+			{
+				"id": "b40f97d2-c8af-49af-b948-3b8f5257f6dd",
+				"method": "POST"
+			},
+			{
+				"id": "e84c5600-1d78-4b6e-8bf0-4e376ccfc87a",
+				"method": "PUT"
+			},
+			{
+				"id": "c39b7d91-aaa7-49cd-b415-1510b7c62fbe",
+				"method": "PUT"
+			},
+			{
+				"id": "e76d23b9-d23b-46d2-99ae-af2a852947bd",
+				"method": "DELETE"
+			},
+			{
+				"id": "fe1b6e55-932c-48c0-8fad-68c8110cec5d",
+				"method": "DELETE"
+			},
+			{
+				"id": "7bd9be69-e016-4c7b-8960-44dabfc2c0c0",
+				"method": "GET"
+			},
+			{
+				"id": "bff7849a-7537-4f83-9930-08f58b98232a",
+				"method": "GET"
+			},
+			{
+				"id": "0fb10aad-1ad6-44b4-b623-5a293d66d87c",
+				"method": "GET"
+			},
+			{
+				"id": "e0f48d4a-6455-4c00-b2c6-0332f3834468",
+				"method": "GET"
+			}
+		]
+	}
+}

@@ -1,0 +1,17 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Electronics and Software"
+    },
+    {
+      "id": 2,
+      "name": "Books"
+    },
+    {
+      "id": 3,
+      "name": "Games"
+    }
+  ],
+  "code": 200
+}

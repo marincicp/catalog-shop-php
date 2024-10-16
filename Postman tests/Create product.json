@@ -1,0 +1,22 @@
+{
+  "data": {
+    "id": 24,
+    "SKU": "vir-new-product-12",
+    "name": "New Product 12",
+    "description": "description...",
+    "price": "23.99",
+    "type": "virtual",
+    "category_id": 1,
+    "user_id": null,
+    "image_url": "image-url...",
+    "created_at": "2024-10-16 12:33:00",
+    "updated_at": "2024-10-16 12:33:00",
+    "category_name": "Electronics and Software",
+    "colors": null,
+    "shipping_prices": null,
+    "coupon_codes": "NEW COUPON",
+    "expires_at": "23.11.2024."
+  },
+  "code": 200,
+  "message": "Product has been successfully created"
+}

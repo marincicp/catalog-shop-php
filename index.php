@@ -17,13 +17,9 @@ $uri = $parsedUri["path"];
 $query = $parsedUri["query"] ?? "";
 $method = $_SERVER["REQUEST_METHOD"];
 
-$router->route($uri, $method, $query);
-
 // TODO You should first create the database 'catalog' and
 // TODO then run the code below.
 // $db = new Database($config["database"]);
-// $db->createTables();
-// $db->insertDataIntoTable($dummyData["users"], $dummyData["sql"]["users"]);
-// $db->insertDataIntoTable($dummyData["categories"], $dummyData["sql"]["categories"]);
-// $db->insertDataIntoTable($dummyData["products"], $dummyData["sql"]["products"]);
-// $db->insertDataIntoTable($dummyData["attributes"], $dummyData["sql"]["attributes"]);
+// $db->createAndSeedTables($dummyData);
+
+$router->route($uri, $method, $query);

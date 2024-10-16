@@ -134,9 +134,20 @@ class Database
       }
    }
 
+
+
+   public function createAndSeedTables($dummyData)
+   {
+      $this->createTables();
+
+      $this->insertDataIntoTable($dummyData["users"], $dummyData["sql"]["users"]);
+      $this->insertDataIntoTable($dummyData["categories"], $dummyData["sql"]["categories"]);
+      $this->insertDataIntoTable($dummyData["products"], $dummyData["sql"]["products"]);
+      $this->insertDataIntoTable($dummyData["attributes"], $dummyData["sql"]["attributes"]);
+   }
+
    public function insertDataIntoTable($data, $sql)
    {
-
       try {
          $this->stmt = $this->conn->prepare($sql);
 

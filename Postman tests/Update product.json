@@ -1,0 +1,22 @@
+{
+  "data": {
+    "id": 14,
+    "SKU": "vir-14-antivirus-software",
+    "name": "Updated Product",
+    "description": "description...",
+    "price": "13.99",
+    "type": "virtual",
+    "category_id": 1,
+    "user_id": 2,
+    "image_url": "image-url...",
+    "created_at": "2024-10-16 11:12:09",
+    "updated_at": "2024-10-16 12:14:14",
+    "category_name": "Electronics and Software",
+    "colors": null,
+    "shipping_prices": null,
+    "coupon_codes": "NEW COUPON",
+    "expires_at": "23.11.2024."
+  },
+  "code": 200,
+  "message": "Product has been successfully updated"
+}

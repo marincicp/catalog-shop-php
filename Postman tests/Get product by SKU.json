@@ -1,0 +1,21 @@
+{
+  "data": {
+    "id": 3,
+    "SKU": "phy-3-tablet-lenovo-p11",
+    "name": "Tablet Lenovo P11",
+    "description": "Experience ultra-smooth action, scrolling and connectivity with the Tab P11 Pro tablet's powerful octa-core processor. And you won't have to worry about lag while playing your mobile games with 120Hz refresh rates and WiFi 6 certification.",
+    "price": "1099.99",
+    "type": "physical",
+    "category_id": 1,
+    "user_id": 2,
+    "image_url": "https://www.links.hr/images/thumbs/0040355_tablet-lenovo-tab-p11-za7s0049bg-lte-11-2k-4gb-128gb-android-10-sivi-010112520.jpg",
+    "created_at": "2024-10-16 11:12:09",
+    "updated_at": "2024-10-16 11:12:09",
+    "category_name": "Electronics and Software",
+    "colors": "Silver",
+    "shipping_prices": "24.99",
+    "coupon_codes": null,
+    "expires_at": null
+  },
+  "code": 200
+}

@@ -1,0 +1,41 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "SKU": "phy-1-laptop-asus",
+      "name": "Laptop Asus",
+      "description": "Powerful gaming laptop with high performance.",
+      "price": "1299.99",
+      "type": "physical",
+      "category_id": 1,
+      "user_id": 1,
+      "image_url": "https://vacom.hr/wp-content/uploads/2024/08/Laptop_Asus_Vivobook_X1502ZA_BQ1966_0-2.png",
+      "created_at": "2024-10-16 11:12:08",
+      "updated_at": "2024-10-16 11:12:08",
+      "category_name": "Electronics and Software",
+      "colors": "Black",
+      "shipping_prices": "29.99",
+      "coupon_codes": null,
+      "expires_at": null
+    },
+    {
+      "id": 2,
+      "SKU": "phy-2-laptop-lenovo",
+      "name": "Laptop Lenovo",
+      "description": "Powerful gaming laptop with high performance.",
+      "price": "1599.99",
+      "type": "physical",
+      "category_id": 1,
+      "user_id": 1,
+      "image_url": "https://www.opus.hr/Content/product/image/xl/laptop-lenovo-ideapad-1-14amn7-athlon-8-gb-14-123445-1.jpg",
+      "created_at": "2024-10-16 11:12:08",
+      "updated_at": "2024-10-16 11:12:08",
+      "category_name": "Electronics and Software",
+      "colors": "Silver",
+      "shipping_prices": "24.99",
+      "coupon_codes": null,
+      "expires_at": null
+    }
+  ],
+  "code": 200
+}
