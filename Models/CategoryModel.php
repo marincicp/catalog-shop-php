@@ -30,10 +30,10 @@ class CategoryModel
    }
 
 
-   public static function getCategoryIds()
+   public static function validateCategory($id)
    {
-      $res = Database::getInstance()->query("SELECT id FROM categories")->get();
+      $res = self::db()->query("SELECT COUNT(*) FROM categories WHERE id = :id", ["id" => $id])->count();
 
-      return  array_column($res, "id");
+      return $res > 0;
    }
 }
