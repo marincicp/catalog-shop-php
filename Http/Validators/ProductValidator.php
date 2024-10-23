@@ -3,6 +3,9 @@
 use Models\CategoryModel;
 use Models\ProductModel;
 
+
+require_once "ImageValidator.php";
+
 class ProductValidator
 {
    protected $errors = [];
@@ -28,9 +31,10 @@ class ProductValidator
          $this->errors["type"] = "Type field must be either 'virtual' or 'physical'";
       }
 
-      if (!isset($data["image_url"]) || !Validator::string($data["image_url"])) {
-         $this->errors["image_url"] = "Image Url field is required";
+      if (!isset($data["image"]) || !ImageValidator::validate($data["image"])) {
+         $this->errors["image"] = "The image must be in one of the following formats: JPG, JPEG, PNG, WEBP, and smaller than 20 MB";
       }
+
 
       if (!isset($data["price"]) || !Validator::number($data["price"]) || $data["price"] === 0) {
          $this->errors["price"] = "Price field must be a number greater than 0";

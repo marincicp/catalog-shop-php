@@ -179,11 +179,28 @@ class ProductModel
    }
 
 
+   public static function getPostData()
+   {
+
+      $fields = ["name", "sku", "description", "price", "type", "category_id", "coupon_code", "expires_at", "shipping_price", "color"];
+
+
+
+      foreach ($fields as $field) {
+         $data[$field] = $_POST[$field] ?? "";
+      }
+
+      $data["image"] = $_FILES["image_url"] ?? "";
+      return $data;
+   }
+
 
    public static function store()
    {
       try {
-         $data = decodeJson();
+
+         $data = self::getPostData();
+
 
          $validator = new ProductValidator();
 
@@ -192,11 +209,14 @@ class ProductModel
             return ["error" => $errors, "code" => 400];
          }
 
+
+         $imagePath = self::saveImage($data["image"]);
+
          $description = $data["description"] ?? "";
 
          self::db()->query("INSERT INTO products
          (name,  SKU, type, price, category_id, description, image_url) VALUES
-        (:name,  :SKU, :type, :price, :category_id, :description, :image_url)", ["name" => $data["name"], "SKU" => $data["sku"], "type" => $data["type"], "price" => $data["price"], "category_id" => $data["category_id"], "description" => $description, "image_url" => $data["image_url"]]);
+        (:name,  :SKU, :type, :price, :category_id, :description, :image_url)", ["name" => $data["name"], "SKU" => $data["sku"], "type" => $data["type"], "price" => $data["price"], "category_id" => $data["category_id"], "description" => $description, "image_url" => $imagePath]);
 
          $productId = self::db()->conn()->lastInsertId();
 
@@ -247,5 +267,16 @@ class ProductModel
       }
 
       return $item;
+   }
+
+
+   public static function saveImage($image)
+   {
+      $imageName = baseName($image["name"]);
+      $newImagePath = "productImages/" . $imageName;
+
+      move_uploaded_file($image["tmp_name"], $newImagePath);
+
+      return $newImagePath;
    }
 }
