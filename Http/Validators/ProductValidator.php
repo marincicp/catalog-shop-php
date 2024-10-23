@@ -21,6 +21,10 @@ class ProductValidator
          if (!isset($data["sku"]) || ProductModel::validateSku($data["sku"])) {
             $this->errors["sku"] = "SKU field must be unique";
          }
+
+         if (!isset($data["image"]) || !ImageValidator::validate($data["image"])) {
+            $this->errors["image"] = "The image must be in one of the following formats: JPG, JPEG, PNG, WEBP, and smaller than 20 MB";
+         }
       }
 
       if (!isset($data["name"]) || !Validator::string($data["name"])) {
@@ -31,9 +35,6 @@ class ProductValidator
          $this->errors["type"] = "Type field must be either 'virtual' or 'physical'";
       }
 
-      if (!isset($data["image"]) || !ImageValidator::validate($data["image"])) {
-         $this->errors["image"] = "The image must be in one of the following formats: JPG, JPEG, PNG, WEBP, and smaller than 20 MB";
-      }
 
 
       if (!isset($data["price"]) || !Validator::number($data["price"]) || $data["price"] === 0) {

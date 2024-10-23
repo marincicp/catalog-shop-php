@@ -114,9 +114,7 @@ class ProductModel
    {
       try {
          $product = self::getItem($sku);
-
-         $data = decodeJson();
-
+         $data  = decodeJson();
          $validator = new ProductValidator();
 
          if (
@@ -133,10 +131,9 @@ class ProductModel
             "UPDATE products SET
                      name = :name, description = :description, 
                      price = :price, type = :type,
-                     image_url = :image_url,
                      category_id = :category_id
                      WHERE SKU = :SKU",
-            ["name" => $data["name"], "description" => $description, "price" => $data["price"], "type" => $data["type"], "image_url" => $data["image_url"], "category_id" => $data["category_id"], "SKU" => $sku]
+            ["name" => $data["name"], "description" => $description, "price" => $data["price"], "type" => $data["type"], "category_id" => $data["category_id"], "SKU" => $sku]
          );
 
 
@@ -194,7 +191,6 @@ class ProductModel
       return $data;
    }
 
-
    public static function store()
    {
       try {
@@ -235,7 +231,6 @@ class ProductModel
    {
       return self::db()->query("SELECT COUNT(*) FROM products WHERE SKU = :SKU", ["SKU" => $sku])->count();
    }
-
    public static function getItem($sku)
    {
       $item = self::db()->query(
