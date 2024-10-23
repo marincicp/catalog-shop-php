@@ -7,13 +7,8 @@ class ProductValidator
 {
    protected $errors = [];
    protected const PRODUCT_TYPES = ["virtual", "physical"];
-   protected $categoyIds;
 
-   public function __construct()
-   {
-
-      $this->categoyIds = CategoryModel::getCategoryIds();
-   }
+   public function __construct() {}
 
 
    public function validate($data, $includeSKU = false)
@@ -41,7 +36,7 @@ class ProductValidator
          $this->errors["price"] = "Price field must be a number greater than 0";
       }
 
-      if (!isset($data["category_id"]) || !in_array($data["category_id"], $this->categoyIds)) {
+      if (!isset($data["category_id"])  || !CategoryModel::validateCategory($data["category_id"])) {
          $this->errors["category_id"] = "Category does not exist";
       }
 
