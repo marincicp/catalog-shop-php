@@ -9,7 +9,7 @@ return [
          'price' => 1299.99,
          'type' => 'physical',
          'category_id' => 1,
-         'image_url' => 'https://vacom.hr/wp-content/uploads/2024/08/Laptop_Asus_Vivobook_X1502ZA_BQ1966_0-2.png',
+         'image_url' => 'productImages/1.webp',
          'user_id' => 1
       ],
       [
@@ -19,7 +19,7 @@ return [
          'price' => 1599.99,
          'type' => 'physical',
          'category_id' => 1,
-         'image_url' => 'https://www.opus.hr/Content/product/image/xl/laptop-lenovo-ideapad-1-14amn7-athlon-8-gb-14-123445-1.jpg',
+         'image_url' => 'productImages/2.webp',
          'user_id' => 1
       ],
       [
@@ -29,7 +29,7 @@ return [
          'price' => 1099.99,
          'type' => 'physical',
          'category_id' => 1,
-         'image_url' => 'https://www.links.hr/images/thumbs/0040355_tablet-lenovo-tab-p11-za7s0049bg-lte-11-2k-4gb-128gb-android-10-sivi-010112520.jpg',
+         'image_url' => 'productImages/3.webp',
          'user_id' => 2
       ],
       [
@@ -39,7 +39,7 @@ return [
          'price' => 1099.99,
          'type' => 'physical',
          'category_id' => 1,
-         'image_url' => 'https://res.garmin.com/transform/image/upload/b_rgb:FFFFFF,c_pad,dpr_2.0,f_auto,h_400,q_auto,w_400/c_pad,h_400,w_400/v1/Product_Images/hr_HR/products/010-02931-02/g/cf-xl?pgw=1',
+         'image_url' => 'productImages/4.webp',
          'user_id' => 1
       ],
       [
@@ -50,7 +50,7 @@ return [
          'price' => 79.99,
          'type' => 'virtual',
          'category_id' => 1,
-         'image_url' => 'https://www.licencedeals.com/cdn/shop/products/Windows-11-Pro-32bit-64bit-download-digital-licence_700x700.png?v=1635340831',
+         'image_url' => 'productImages/5.webp',
          'user_id' => 1
       ],
       [
@@ -61,7 +61,7 @@ return [
          'price' => 59.99,
          'type' => 'virtual',
          'category_id' => 1,
-         'image_url' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9odJR9yLTpz5WYe8hVwF-koaBKED-O4dpsA&s',
+         'image_url' => 'productImages/1.png',
          'user_id' => 2
       ],
       [
@@ -72,7 +72,7 @@ return [
          'price' => 19.99,
          'type' => 'virtual',
          'category_id' => 2,
-         'image_url' => "https://www.mysteriousbookshop.com/cdn/shop/files/41X_GSFIFkL.SX316.SY480._SL500_large.jpg?v=1722027469",
+         'image_url' => "productImages/7.jpg",
          'user_id' => 2
       ],
       [
@@ -83,7 +83,7 @@ return [
          'price' => 19.99,
          'type' => 'physical',
          'category_id' => 2,
-         'image_url' => 'https://m.media-amazon.com/images/I/718YmyAfAAL._AC_UF894,1000_QL80_.jpg',
+         'image_url' => 'productImages/8.jpg',
          'user_id' => 2
       ],
       [
@@ -94,7 +94,7 @@ return [
          'price' => 29.99,
          'type' => 'physical',
          'category_id' => 2,
-         'image_url' => 'https://m.media-amazon.com/images/I/91xwJDg3ISL._UF1000,1000_QL80_.jpg',
+         'image_url' => 'productImages/9.jpg',
          'user_id' => 2
       ],
       [
@@ -105,7 +105,7 @@ return [
          'price' => 29.99,
          'type' => 'physical',
          'category_id' => 3,
-         'image_url' => 'https://image.api.playstation.com/vulcan/ap/rnd/202108/1821/QeAWbCZbFtYSbViA21EOL6S1.png',
+         'image_url' => 'productImages/10.png',
          'user_id' => 2
       ],
       [
@@ -116,7 +116,7 @@ return [
          'price' => 59.99,
          'type' => 'virtual',
          'category_id' => 3,
-         'image_url' => 'https://latinafy.com/cdn/shop/files/D_970953-MLA71285473836_082023-O_351x500.jpg?v=1714058006',
+         'image_url' => 'productImages/11.png',
          'user_id' => 2
       ],
       [
@@ -127,7 +127,7 @@ return [
          'price' => 49.99,
          'type' => 'virtual',
          'category_id' => 3,
-         'image_url' => 'https://products.eneba.games/resized-products/bckGkS9MnpGmakrwrPBuAQmGGT3shuE97X603SdaBKA_95x140_3x-0.png',
+         'image_url' => 'productImages/12.jpg',
          'user_id' => 1
       ],
       [
@@ -138,7 +138,7 @@ return [
          'price' => 799.99,
          'type' => 'physical',
          'category_id' => 1,
-         'image_url' => 'https://www.nabava.net/slike/products/76/11/13001176/samsung-galaxy-s21-5g-128gb-62_5a713bcc.jpeg',
+         'image_url' => 'productImages/13.webp',
          'user_id' => 1
       ],
       [
@@ -149,7 +149,7 @@ return [
          'price' => 49.99,
          'type' => 'virtual',
          'category_id' => 1,
-         'image_url' => "https://m.media-amazon.com/images/I/71Im3llH+zL._AC_UF1000,1000_QL80_.jpg",
+         'image_url' => "productImages/14.jpg",
          'user_id' => 2
       ],
       [
@@ -160,7 +160,7 @@ return [
          'price' => 199.99,
          'type' => 'physical',
          'category_id' => 1,
-         'image_url' => 'https://image.made-in-china.com/202f0j00TVIrdDJoLbcn/PRO5-Bluetooth-5-0-Wireless-Earbuds-Tws-Wireless-Headphones-in-Ear-Earphones-with-Charging-Case.webp',
+         'image_url' => 'productImages/15.webp',
          'user_id' => 2
       ],
       [
@@ -171,7 +171,7 @@ return [
          'price' => 149.99,
          'type' => 'virtual',
          'category_id' => 1,
-         'image_url' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEF4FUbsAhs9HRnXuaWXT6LuCw7wwTM8neew&s',
+         'image_url' => 'productImages/16.jpg',
          'user_id' => 1
       ],
       [
@@ -182,7 +182,7 @@ return [
          'price' => 89.99,
          'type' => 'physical',
          'category_id' => 1,
-         'image_url' => 'https://m.media-amazon.com/images/I/71wYcZf-YXL._AC_UF894,1000_QL80_.jpg',
+         'image_url' => 'productImages/17.webp',
          'user_id' => 1
       ],
       [
@@ -193,7 +193,7 @@ return [
          'price' => 99.99,
          'type' => 'virtual',
          'category_id' => 1,
-         'image_url' => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtHpbyl4vtkxVEXYQCW32Q4lKdLutbU10gcA&s",
+         'image_url' => "productImages/18.jpg",
          'user_id' => 2
       ],
       [
@@ -204,7 +204,7 @@ return [
          'price' => 249.99,
          'type' => 'physical',
          'category_id' => 1,
-         'image_url' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIInTCrgMnUoBeARToAvTq70mUwfbWPilY0A&s',
+         'image_url' => 'productImages/19.jpg',
          'user_id' => 1
       ],
       [
@@ -215,7 +215,7 @@ return [
          'price' => 59.99,
          'type' => 'virtual',
          'category_id' => 1,
-         'image_url' => 'https://static.wixstatic.com/media/46df96_418797a7bae04aaf8b2367944ec33662~mv2.png/v1/fill/w_479,h_326,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/46df96_418797a7bae04aaf8b2367944ec33662~mv2.png',
+         'image_url' => 'productImages/20.webp',
          'user_id' => 2
       ],
    ],
