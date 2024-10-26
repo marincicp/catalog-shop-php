@@ -1,5 +1,7 @@
 <?php
 
+use Core\Response;
+
 
 
 function dd($value)
@@ -11,7 +13,7 @@ function dd($value)
 }
 
 
-function abort($code = 404, $message = "The requested route could not be found")
+function abort($code = Response::NOT_FOUND, $message = "The requested route could not be found")
 {
    http_response_code($code);
    header("Content-Type: application/json");
@@ -20,7 +22,15 @@ function abort($code = 404, $message = "The requested route could not be found")
 }
 
 
-function sendJsonRes($data, $code = 200)
+function authorize($condition)
+{
+   if (!$condition) {
+      abort(Response::FORBIDDEN, "Access denied: You do not have permission to perform this action");
+   }
+}
+
+
+function sendJsonRes($data, $code = Response::SUCCESS)
 {
    http_response_code($code);
    header('Content-Type: application/json');
@@ -31,10 +41,14 @@ function sendJsonRes($data, $code = 200)
 function formatRes($data)
 {
    if (empty($data)) {
-      return ["error" => "No data found", "code" => 404, "data" => []];
+      return ["error" => "No data found", "code" => Response::NOT_FOUND, "data" => []];
    }
-   return ["data" => $data, "code" => 200];
+   return ["data" => $data, "code" => Response::SUCCESS];
 }
+
+
+
+
 
 
 function decodeJson()
@@ -42,7 +56,7 @@ function decodeJson()
    $data = json_decode(file_get_contents("php://input"), true);
 
    if (!$data) {
-      throw new Exception("Invalid JSON data", 400);
+      throw new Exception("Invalid JSON data", Response::BAD_REQUEST);
    }
 
    return $data;
