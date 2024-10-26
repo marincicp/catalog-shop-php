@@ -29,13 +29,13 @@ class ProductModel
                 categories.name AS category_name,
                 GROUP_CONCAT(CASE 
                 WHEN attributes.attribute = 'color' THEN attributes.value 
-                END) AS colors,
+                END) AS color,
                 GROUP_CONCAT(CASE 
                 WHEN attributes.attribute = 'shipping_price' THEN attributes.value 
-                END) AS shipping_prices,
+                END) AS shipping_price,
                 GROUP_CONCAT(CASE 
                 WHEN attributes.attribute = 'coupon_code' THEN attributes.value 
-                END) AS coupon_codes,
+                END) AS coupon_code,
                 GROUP_CONCAT(CASE 
                 WHEN attributes.attribute = 'expires_at' THEN attributes.value 
                 END) AS expires_at
@@ -238,13 +238,13 @@ class ProductModel
          categories.name AS category_name,
           GROUP_CONCAT(CASE 
           WHEN attributes.attribute = 'color' THEN attributes.value 
-          END) AS colors,
+          END) AS color,
           GROUP_CONCAT(CASE 
           WHEN attributes.attribute = 'shipping_price' THEN attributes.value 
-          END) AS shipping_prices,
+          END) AS shipping_price,
           GROUP_CONCAT(CASE 
           WHEN attributes.attribute = 'coupon_code' THEN attributes.value 
-          END) AS coupon_codes,
+          END) AS coupon_code,
           GROUP_CONCAT(CASE 
           WHEN attributes.attribute = 'expires_at' THEN attributes.value 
           END) AS expires_at
