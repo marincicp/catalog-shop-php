@@ -2,6 +2,7 @@
 
 use Http\Controllers\CategoryController;
 use Http\Controllers\ProductController;
+use Http\Controllers\RegistrationController;
 
 $router->get("/products", ProductController::class, "index");
 $router->get("/products/{SKU}", ProductController::class, "show");
@@ -10,3 +11,6 @@ $router->put("/products/{SKU}", ProductController::class, "update");
 $router->post("/products", ProductController::class, "store");
 
 $router->get("/categories", CategoryController::class, "index");
+
+
+$router->post("/register", RegistrationController::class, "store");
