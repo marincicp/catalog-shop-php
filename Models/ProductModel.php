@@ -2,24 +2,16 @@
 
 namespace Models;
 
-use Core\Database;
+use Core\Session;
 use Exception;
 use ProductValidator;
 
+require_once "Model.php";
 require_once "./Models/CategoryModel.php";
 require_once "./Http/Validators/ProductValidator.php";
 require_once "./Core/functions.php";
-class ProductModel
+class ProductModel extends Model
 {
-   static $db;
-
-   public static function db()
-   {
-      if (!self::$db) {
-         self::$db = Database::getInstance();
-      }
-      return self::$db;
-   }
 
    public static function get()
    {
@@ -84,11 +76,11 @@ class ProductModel
       }
    }
 
-   public static function find($sku)
+   public static function find($id)
    {
       try {
-         $product = self::getItem($sku);
-         return formatRes($product);
+         $data = self::getItem(sku: $id);
+         return formatRes($data);
       } catch (Exception $err) {
          return ["code" => $err->getCode(), "error" => $err->getMessage()];
       }
@@ -98,7 +90,10 @@ class ProductModel
    public static function delete($sku)
    {
       try {
-         self::getItem($sku);
+         $product =    self::getItem($sku);
+         $curUser = Session::get("user");
+
+         authorize($product["user_id"] === $curUser["id"]);
 
          self::db()->query("DELETE FROM products WHERE SKU = :SKU", ["SKU" => $sku]);
 
