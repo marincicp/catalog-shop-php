@@ -6,7 +6,7 @@ class UserValidator
 {
 
    private $errors = [];
-   public function validate($email, $password)
+   public function validateRegister($email, $password)
    {
 
       if (!isset($email) || !Validator::email($email)) {
@@ -27,6 +27,23 @@ class UserValidator
 
       return true;
    }
+
+   public function validateLogin($email, $password)
+   {
+      if (!isset($email) || !Validator::email($email)) {
+         $this->errors["email"] = "Invalid email";
+      }
+
+      if (!isset($password) || !Validator::string($password))
+         $this->errors["password"] = "Invalid password";
+
+      if (!empty($this->errors)) {
+         return false;
+      }
+
+      return true;
+   }
+
 
 
    public function error()
