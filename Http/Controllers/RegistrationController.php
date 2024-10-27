@@ -11,9 +11,7 @@ class RegistrationController
 
    public static function store()
    {
-
       $res =  UserModel::register();
-
-      return sendJsonRes($res);
+      return sendJsonRes($res, $res["code"]);
    }
 }
