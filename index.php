@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
    exit();
 }
 
+session_start();
 // TODO You should first create the database 'catalog' and
 // TODO then run the code below.
 // $db = new Database($config["database"]);

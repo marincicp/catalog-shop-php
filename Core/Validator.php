@@ -19,4 +19,9 @@ class  Validator
    {
       return is_numeric($value);
    }
+
+   public static function email($value)
+   {
+      return filter_var($value, FILTER_VALIDATE_EMAIL);
+   }
 }
