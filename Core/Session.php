@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use Models\UserModel;
+
 class Session
 {
 
@@ -14,5 +16,16 @@ class Session
    public static function get($key, $default = null)
    {
       return $_SESSION[$key] ?? $default;
+   }
+
+
+
+
+
+   public static function clear()
+   {
+
+
+      return $_SESSION = [];
    }
 }

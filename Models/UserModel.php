@@ -4,19 +4,21 @@ namespace Models;
 
 use Core\Session;
 use Exception;
-use Random\Engine\Secure;
 use UserValidator;
+use Validator;
 
 require_once "Model.php";
 require_once "./Http/Validators/UserValidator.php";
 require_once "./Core/functions.php";
 
 
+
 class UserModel extends Model
 {
 
 
-
+   ////////////////////////////////////////////////////////////////////////
+   // REGISTER logic
 
 
    public static function register()
@@ -28,7 +30,7 @@ class UserModel extends Model
 
       $validator = new UserValidator();
 
-      if (!$validator->validate($email, $password)) {
+      if (!$validator->validateRegister($email, $password)) {
          $errors = $validator->error();
          return ["errors" => $errors, "code" => 400];
       }
@@ -49,9 +51,72 @@ class UserModel extends Model
    }
 
 
-   public static function login() {}
-   public static function logout() {}
+   ////////////////////////////////////////////////////////////////////////
+   // LOGIN logic
 
+
+   public static function store()
+   {
+
+      $data =  decodeJson();
+      $password = $data["password"];
+      $email =  $data["email"];
+
+
+      $validator = new UserValidator();
+
+      if (! $validator->validateLogin($email, $password)) {
+         $errors = $validator->error();
+         return ["errors" => $errors, "code" => 400];
+      }
+
+      return    self::attemptToLogin($email, $password);
+   }
+
+
+
+   public static function attemptToLogin($email, $password)
+   {
+      $user = self::find($email);
+
+      if ($user) {
+         if (password_verify($password, $user["password"])) {
+            Session::set("user", ["email" => $email, "id" => $user["id"]]);
+            session_regenerate_id(true);
+
+            return ["user" => ["id" => $user["id"], "email" => $user["email"]], "code" => 200];
+         }
+      }
+
+      return ["errors" => "Invalid email or password", "code" => 400];
+   }
+
+   public static function logout()
+   {
+      Session::clear();
+      session_destroy();
+
+      $params = session_get_cookie_params();
+      return setcookie("PHPSESSID", "", time() - 3600, $params["path"], $params["domain"]);
+   }
+
+
+
+   ////////////////////////////////////////////////////////////////////////
+   // HELPERS
+
+   public static function find($email)
+   {
+
+      return self::db()->query("SELECT * from users WHERE email =  :email", ["email" => $email])->find();
+   }
+
+   public static function getCurrentUser()
+   {
+      $res = Session::get("user");
+
+      return ["user" => Session::get("user")];
+   }
 
 
    public static function checkIfEmailExist($email)
