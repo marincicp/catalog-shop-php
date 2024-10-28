@@ -112,6 +112,9 @@ class ProductModel extends Model
          $data  = decodeJson();
          $validator = new ProductValidator();
 
+         $user = Session::get("user");
+         authorize(!(empty($product["user_id"]) && empty($user["id"]))  &&  $product["user_id"] ===  $user["id"]);
+
          if (
             !$validator->validate(data: $data)
          ) {
@@ -174,7 +177,7 @@ class ProductModel extends Model
    public static function getPostData()
    {
 
-      $fields = ["name", "sku", "description", "price", "type", "category_id", "coupon_code", "expires_at", "shipping_price", "color"];
+      $fields = ["name", "sku", "description", "price", "type", "category_id", "coupon_code", "expires_at", "shipping_price", "color", "user_id"];
 
 
 
@@ -192,6 +195,7 @@ class ProductModel extends Model
 
          $data = self::getPostData();
 
+         authorize($data["user_id"]);
 
          $validator = new ProductValidator();
 
@@ -206,8 +210,8 @@ class ProductModel extends Model
          $description = $data["description"] ?? "";
 
          self::db()->query("INSERT INTO products
-         (name,  SKU, type, price, category_id, description, image_url) VALUES
-        (:name,  :SKU, :type, :price, :category_id, :description, :image_url)", ["name" => $data["name"], "SKU" => $data["sku"], "type" => $data["type"], "price" => $data["price"], "category_id" => $data["category_id"], "description" => $description, "image_url" => $imagePath]);
+         (name,  SKU, type, price, category_id, description, image_url, user_id) VALUES
+        (:name,  :SKU, :type, :price, :category_id, :description, :image_url, :user_id)", ["name" => $data["name"], "SKU" => $data["sku"], "type" => $data["type"], "price" => $data["price"], "category_id" => $data["category_id"], "description" => $description, "image_url" => $imagePath, "user_id" => $data["user_id"]]);
 
          $productId = self::db()->conn()->lastInsertId();
 
