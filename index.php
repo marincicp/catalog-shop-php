@@ -10,7 +10,6 @@ $dummyData =  require_once "dummyData.php";
 require_once "Core/Validator.php";
 $router = new Router();
 $routes = require "routes.php";
-$config = require "Core/config.php";
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
@@ -29,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 session_start();
 // TODO You should first create the database 'catalog' and
 // TODO then run the code below.
-// $db = new Database($config["database"]);
+// $db =  Database::getInstance();
 // $db->createAndSeedTables($dummyData);
 
 $router->route($uri, $method, $query);

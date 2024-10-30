@@ -2,22 +2,25 @@
 
 namespace Core;
 
+use Exception;
 use PDO;
 use PDOException;
 
 require_once "functions.php";
 
+
 class Database
 
 {
-   public $conn;
-   public $stmt;
+   private $conn;
+   private $stmt;
    static $instance;
 
-   public function __construct($config)
+   private function __construct($config)
    {
       $this->connect($config);
    }
+
 
    protected function connect($config)
    {
@@ -35,17 +38,17 @@ class Database
    }
 
 
-
-
-   public static function getInstance()
+   public static function getInstance(): Database
    {
       $config = require "config.php";
-
       if (self::$instance === null) {
          self::$instance = new Database($config["database"]);
       }
       return self::$instance;
    }
+
+
+   private function __clone() {}
 
 
    public function query($query, $params = [])
