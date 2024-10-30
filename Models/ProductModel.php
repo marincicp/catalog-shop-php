@@ -4,12 +4,14 @@ namespace Models;
 
 use Core\Session;
 use Exception;
+use ProductResources;
 use ProductValidator;
 
 require_once "Model.php";
 require_once "./Models/CategoryModel.php";
 require_once "./Http/Validators/ProductValidator.php";
 require_once "./Core/functions.php";
+require_once "./Http/Resources/ProductResources.php";
 class ProductModel extends Model
 {
 
@@ -70,17 +72,18 @@ class ProductModel extends Model
 
          $products = self::db()->query($sql, $params)->get();
 
-         return formatRes($products);
+         return ProductResources::collection($products);
       } catch (Exception $err) {
          return ["code" => $err->getCode(), "error" => $err->getMessage()];
       }
    }
 
-   public static function find($id)
+   public static function find($id): array
    {
       try {
          $data = self::getItem(sku: $id);
-         return formatRes($data);
+
+         return  ProductResources::single($data);
       } catch (Exception $err) {
          return ["code" => $err->getCode(), "error" => $err->getMessage()];
       }
@@ -93,7 +96,7 @@ class ProductModel extends Model
          $product =    self::getItem($sku);
          $curUser = Session::get("user");
 
-         authorize($product["user_id"] === $curUser["id"]);
+         // authorize($product["user_id"] === $curUser["id"]);
 
          self::db()->query("DELETE FROM products WHERE SKU = :SKU", ["SKU" => $sku]);
 
@@ -141,7 +144,7 @@ class ProductModel extends Model
 
          $updatedProduct = self::getItem($sku);
 
-         return ["data" => $updatedProduct, "code" => 200, "message" => "Product has been successfully updated"];
+         ProductResources::single($updatedProduct, "Product has been successfully updated");
       } catch (Exception $err) {
 
          return ["code" => $err->getCode(), "error" => $err->getMessage()];
