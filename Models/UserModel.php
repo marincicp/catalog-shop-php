@@ -2,6 +2,7 @@
 
 namespace Models;
 
+use Core\Jwt;
 use Core\Session;
 use Exception;
 use UserValidator;
@@ -10,7 +11,7 @@ use Validator;
 require_once "Model.php";
 require_once "./Http/Validators/UserValidator.php";
 require_once "./Core/functions.php";
-
+require_once "./Core/Jwt.php";
 
 
 class UserModel extends Model
@@ -84,7 +85,9 @@ class UserModel extends Model
             Session::set("user", ["email" => $email, "id" => $user["id"]]);
             session_regenerate_id(true);
 
-            return ["user" => ["id" => $user["id"], "email" => $user["email"]], "code" => 200];
+            $jwt = Jwt::generateJWT($user["id"]);
+
+            return ["token" => $jwt, "user" => ["id" => $user["id"], "email" => $user["email"]], "code" => 200];
          }
       }
 
