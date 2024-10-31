@@ -2,6 +2,8 @@
 
 namespace Models;
 
+use Core\Jwt;
+use Core\Response;
 use Core\Session;
 use Exception;
 use ProductResources;
@@ -12,12 +14,22 @@ require_once "./Models/CategoryModel.php";
 require_once "./Http/Validators/ProductValidator.php";
 require_once "./Core/functions.php";
 require_once "./Http/Resources/ProductResources.php";
+require_once "./Core/Jwt.php";
 class ProductModel extends Model
 {
 
    public static function get()
    {
       try {
+         $headers = getallheaders();
+         $auth = $headers["Authorization"];
+         $token = explode(" ", $auth)[1];
+
+         $isVerify = Jwt::verifyJWT($token);
+
+         if (!$isVerify) {
+            abort(Response::FORBIDDEN, "Access denied: You do not have permission to perform this action");
+         }
 
          $sql = "SELECT products.*, 
                 categories.name AS category_name,
