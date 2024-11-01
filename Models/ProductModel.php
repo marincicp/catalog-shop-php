@@ -21,16 +21,15 @@ class ProductModel extends Model
    public static function get()
    {
       try {
-         $headers = getallheaders();
-         $auth = $headers["Authorization"];
-         $token = explode(" ", $auth)[1];
+         // $headers = getallheaders();
+         // $auth = $headers["Authorization"];
+         // $token = explode(" ", $auth)[1];
 
-         $isVerify = Jwt::verifyJWT($token);
+         // $isVerify = Jwt::verifyJWT($token);
 
-         if (!$isVerify) {
-            abort(Response::FORBIDDEN, "Access denied: You do not have permission to perform this action");
-         }
-
+         // if (!$isVerify) {
+         //    abort(Response::FORBIDDEN, "Access denied: You do not have permission to perform this action");
+         // }
          $sql = "SELECT products.*, 
                 categories.name AS category_name,
                 GROUP_CONCAT(CASE 

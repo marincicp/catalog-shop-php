@@ -58,6 +58,17 @@ function decodeJson()
    if (!$data) {
       throw new Exception("Invalid JSON data", Response::BAD_REQUEST);
    }
-
    return $data;
+}
+
+
+function getJwtToken()
+{
+   $headers = getallheaders();
+   $authorizationHeader = $headers["Authorization"] ?? null;
+
+   if ($authorizationHeader) {
+      $token = explode(" ", $authorizationHeader)[1];
+      return $token;
+   }
 }
