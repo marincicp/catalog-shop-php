@@ -11,8 +11,9 @@ require_once "Core/Validator.php";
 $router = new Router();
 $routes = require "routes.php";
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+
+header("Access-Control-Allow-Origin: http://localhost:5173");
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization");
 header("Access-Control-Allow-Methods: GET, POST,PUT,DELETE, OPTIONS");
 
 $parsedUri = parse_url($_SERVER["REQUEST_URI"]);
