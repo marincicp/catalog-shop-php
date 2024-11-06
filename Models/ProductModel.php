@@ -18,6 +18,13 @@ require_once "./Core/Jwt.php";
 class ProductModel extends Model
 {
 
+
+   /**
+    * Get all products from the database, with optional query parameters
+    * Query parameters:
+    * name, category, type, minPrice, maxPrice
+    * @return array
+    */
    public static function get()
    {
       try {
@@ -89,10 +96,16 @@ class ProductModel extends Model
       }
    }
 
-   public static function find($id): array
+
+   /**
+    * Find a specific product by SKU (Stock Keeping Unit)
+    * @param string $sku
+    * @return array
+    */
+   public static function find(string $sku): array
    {
       try {
-         $data = self::getItem(sku: $id);
+         $data = self::getItem(sku: $sku);
 
          return  ProductResources::single($data);
       } catch (Exception $err) {
@@ -101,7 +114,13 @@ class ProductModel extends Model
    }
 
 
-   public static function delete($sku)
+
+   /**
+    * Delete a specific product by SKU (Stock Keeping Unit)
+    * @param string $sku
+    * @return array
+    */
+   public static function delete(string $sku): array
    {
       try {
          $product =    self::getItem($sku);
@@ -119,7 +138,12 @@ class ProductModel extends Model
 
 
 
-   public static function update($sku)
+   /**
+    * Update a specific product by SKU (Stock Keeping Unit)
+    * @param string $sku
+    * @return array
+    */
+   public static function update(string $sku): array
    {
       try {
          $product = self::getItem($sku);
@@ -155,7 +179,7 @@ class ProductModel extends Model
 
          $updatedProduct = self::getItem($sku);
 
-         ProductResources::single($updatedProduct, "Product has been successfully updated");
+         return   ProductResources::single($updatedProduct, "Product has been successfully updated");
       } catch (Exception $err) {
 
          return ["code" => $err->getCode(), "error" => $err->getMessage()];
@@ -163,7 +187,16 @@ class ProductModel extends Model
    }
 
 
-   protected static function updateProductAttributes($data, $productId, $type = "create")
+
+
+   /**
+    * Update additional attributes of a product based on its type (virtual or physical)
+    * @param array $data - product data
+    * @param int $productId
+    * @param string $type - action type, either 'create' or 'update'
+    * @return void
+    */
+   protected static function updateProductAttributes(array $data, int $productId, string  $type = "create"): void
    {
       if ($data["type"] === "physical") {
          $attributes["color"] = $data["color"];
@@ -188,12 +221,14 @@ class ProductModel extends Model
    }
 
 
-   public static function getPostData()
+   /**
+    *  Retrieve and format product data from the POST request
+    * @return array
+    */
+   public static function getPostData(): array
    {
 
       $fields = ["name", "sku", "description", "price", "type", "category_id", "coupon_code", "expires_at", "shipping_price", "color", "user_id"];
-
-
 
       foreach ($fields as $field) {
          $data[$field] = $_POST[$field] ?? "";
@@ -203,7 +238,12 @@ class ProductModel extends Model
       return $data;
    }
 
-   public static function store()
+
+   /**
+    * Store a new product in the database
+    * @return array
+    */
+   public static function store(): array
    {
       try {
 
@@ -219,7 +259,7 @@ class ProductModel extends Model
          }
 
 
-         $imagePath = self::saveImage($data["image"]);
+         $imagePath = self::saveImage(image: $data["image"]);
 
          $description = $data["description"] ?? "";
 
@@ -240,11 +280,28 @@ class ProductModel extends Model
    }
 
 
-   public static function validateSku($sku)
+   /**
+    * Check if the provided SKU already exists in the database.
+    * Each product must have a unique SKU.
+    * @param string $sku
+    * @return bool
+    */
+   public static function validateSku(string $sku): bool
    {
-      return self::db()->query("SELECT COUNT(*) FROM products WHERE SKU = :SKU", ["SKU" => $sku])->count();
+      $res = self::db()->query("SELECT COUNT(*) FROM products WHERE SKU = :SKU", ["SKU" => $sku])->count();
+
+      return $res > 0;
    }
-   public static function getItem($sku)
+
+
+   /**
+    * Fetch a specific product by SKU
+    * Used to check and validate the product during update and delete operations
+    * @param string $sku
+    * @throws \Exception
+    * @return \Exception|array
+    */
+   public static function getItem(string $sku): Exception|array
    {
       $item = self::db()->query(
          "SELECT  products.*, 
@@ -278,7 +335,12 @@ class ProductModel extends Model
    }
 
 
-   public static function saveImage($image)
+   /**
+    * Store the product image on the server
+    * @param array $image
+    * @return string
+    */
+   public static function saveImage(array $image): string
    {
       $imageName = baseName($image["name"]);
       $newImagePath = "productImages/" . $imageName;

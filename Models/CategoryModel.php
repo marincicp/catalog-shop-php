@@ -2,26 +2,20 @@
 
 namespace Models;
 
-use Core\Database;
+require_once "Model.php";
 
-class CategoryModel
+class CategoryModel extends Model
 {
 
-   static $db;
 
-
-   public static function db()
-   {
-      if (!self::$db) {
-         self::$db = Database::getInstance();
-      }
-      return self::$db;
-   }
-
-   public static function get()
+   /**
+    * Get all categories from the database
+    * @return array
+    */
+   public static function get(): array
    {
       try {
-         $products = Database::getInstance()->query("SELECT id,name FROM categories")->get();
+         $products = static::db()->query("SELECT id,name FROM categories")->get();
 
          return formatRes($products);
       } catch (\Exception $err) {
@@ -29,10 +23,14 @@ class CategoryModel
       }
    }
 
-
-   public static function validateCategory($id)
+   /**
+    * Check if a category with the given id exists
+    * @param int $id
+    * @return bool
+    */
+   public static function validateCategory(int $id): bool
    {
-      $res = self::db()->query("SELECT COUNT(*) FROM categories WHERE id = :id", ["id" => $id])->count();
+      $res = static::db()->query("SELECT COUNT(*) FROM categories WHERE id = :id", ["id" => $id])->count();
 
       return $res > 0;
    }

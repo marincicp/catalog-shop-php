@@ -21,8 +21,11 @@ class UserModel extends Model
    ////////////////////////////////////////////////////////////////////////
    // REGISTER logic
 
-
-   public static function register()
+   /**
+    *  Register a new user
+    * @return array
+    */
+   public static function register(): array
    {
 
       $data  = decodeJson();
@@ -55,8 +58,11 @@ class UserModel extends Model
    ////////////////////////////////////////////////////////////////////////
    // LOGIN logic
 
-
-   public static function store()
+   /**
+    * Log in a user
+    * @return array
+    */
+   public static function store(): array
    {
 
       $data =  decodeJson();
@@ -75,8 +81,13 @@ class UserModel extends Model
    }
 
 
-
-   public static function attemptToLogin($email, $password)
+   /**
+    * This method handles the process of authenticating a user by verifying the provided credentials
+    * @param string $email
+    * @param string $password
+    * @return array
+    */
+   public static function attemptToLogin(string $email, string  $password): array
    {
       $user = self::find($email);
 
@@ -94,6 +105,8 @@ class UserModel extends Model
       return ["errors" => "Invalid email or password", "code" => 400];
    }
 
+
+
    public static function logout()
    {
       Session::clear();
@@ -108,10 +121,15 @@ class UserModel extends Model
    ////////////////////////////////////////////////////////////////////////
    // HELPERS
 
-   public static function find($email)
-   {
 
-      return self::db()->query("SELECT * from users WHERE email =  :email", ["email" => $email])->find();
+   /**
+    * Find a specific user by email
+    * @param string $email
+    * @return mixed
+    */
+   public static function find(string $email): mixed
+   {
+      return  self::db()->query("SELECT * from users WHERE email =  :email", ["email" => $email])->find();
    }
 
    public static function getCurrentUser()
@@ -122,8 +140,16 @@ class UserModel extends Model
    }
 
 
-   public static function checkIfEmailExist($email)
+   /**
+    * Check if the provided email already exists in the database.
+    * Each user must have a unique email.
+    * @param string $email
+    * @return bool
+    */
+   public static function checkIfEmailExist(string $email): bool
    {
-      return self::db()->query("SELECT COUNT(*) FROM users WHERE email = :email", ["email" => $email])->count();
+      $res =  self::db()->query("SELECT COUNT(*) FROM users WHERE email = :email", ["email" => $email])->count();
+
+      return $res > 0;
    }
 }

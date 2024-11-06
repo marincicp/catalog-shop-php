@@ -8,13 +8,18 @@ use Core\Database;
 class Model
 {
 
-   static $db;
+   static protected $db;
 
-   public static function db()
+
+   /**
+    * Get instance of the Database connection
+    * @return \Core\Database
+    */
+   protected static function db(): Database
    {
-      if (!self::$db) {
-         self::$db = Database::getInstance();
+      if (!static::$db) {
+         static::$db = Database::getInstance();
       }
-      return self::$db;
+      return static::$db;
    }
 }
