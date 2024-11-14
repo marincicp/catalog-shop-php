@@ -124,9 +124,8 @@ class ProductModel extends Model
    {
       try {
          $product =    self::getItem($sku);
-         $curUser = Session::get("user");
 
-         // authorize($product["user_id"] === $curUser["id"]);
+         Jwt::authorizeUser($product["user_id"]);
 
          self::db()->query("DELETE FROM products WHERE SKU = :SKU", ["SKU" => $sku]);
 
@@ -150,8 +149,7 @@ class ProductModel extends Model
          $data  = decodeJson();
          $validator = new ProductValidator();
 
-         $user = Session::get("user");
-         authorize(!(empty($product["user_id"]) && empty($user["id"]))  &&  $product["user_id"] ===  $user["id"]);
+         Jwt::authorizeUser($product["user_id"]);
 
          if (
             !$validator->validate(data: $data)

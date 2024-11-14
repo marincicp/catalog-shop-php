@@ -79,11 +79,6 @@ class Router
       $this->abort();
    }
 
-
-
-
-
-
    protected function abort($code = 404, $message = "The requested route could not be found")
    {
       http_response_code($code);

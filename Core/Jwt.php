@@ -36,4 +36,17 @@ class Jwt
          return null;
       }
    }
+
+
+
+   public static function authorizeUser($productUserId)
+   {
+      $headers = getallheaders();
+      $auth = $headers["Authorization"];
+      $token = explode(" ", $auth)[1];
+
+      $user = self::verifyJWT($token);
+
+      authorize($user->user_id === $productUserId);
+   }
 }
